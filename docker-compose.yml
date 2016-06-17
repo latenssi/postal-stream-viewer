@@ -1,0 +1,36 @@
+version: '2'
+services:
+
+  dev:
+    image: nodesource/jessie:6
+    environment:
+      NODE_ENV: 'dev'
+      STREAM_KEY: 'dev'
+    ports:
+      - "8080:8080"
+    volumes:
+     - .:/usr/src/app
+    command: npm start
+
+  builder:
+    image: nodesource/jessie:6
+    environment:
+      NODE_ENV: 'production'
+    volumes:
+     - .:/usr/src/app
+    command: npm run build
+
+  rtmp:
+    image: latenssi/nginx-rtmp
+    environment:
+      PUBLISH_SECRET: 'dev'
+      CORS_HTTP_ORIGIN: '(https?://localhost(:[0-9]+)?)'
+    env_file: .env
+    ports:
+      - "8000:80"
+      - "1935:1935"
+  web:
+    build:
+      context: .
+    ports:
+      - "8080:80"
