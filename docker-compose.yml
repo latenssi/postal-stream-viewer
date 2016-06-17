@@ -5,7 +5,6 @@ services:
     image: nodesource/jessie:6
     environment:
       NODE_ENV: 'dev'
-      STREAM_KEY: 'dev'
     env_file: .env
     ports:
       - "8080:8080"
@@ -17,6 +16,7 @@ services:
     image: nodesource/jessie:6
     environment:
       NODE_ENV: 'production'
+    env_file: .env
     volumes:
      - .:/usr/src/app
     command: npm run build
