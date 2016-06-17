@@ -6,6 +6,7 @@ services:
     environment:
       NODE_ENV: 'dev'
       STREAM_KEY: 'dev'
+    env_file: .env
     ports:
       - "8080:8080"
     volumes:

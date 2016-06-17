@@ -21,7 +21,8 @@ const commonExternals = {
   "react": "React",
   "react-dom": "ReactDOM",
   "react-router": "ReactRouter",
-  "axios": "axios"
+  "axios": "axios",
+  "Pusher": "Pusher"
 }
 
 const commonLoaders = [
