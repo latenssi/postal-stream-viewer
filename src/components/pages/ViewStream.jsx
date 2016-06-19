@@ -64,7 +64,7 @@ class ViewStream extends Component {
             <h5>Settings > Broadcast Settings / Stream</h5>
             <ul>
               <li><strong>Stream type:</strong> <code>Custom streaming server</code></li>
-              <li><strong>URL:</strong> <code>rtmp://{RTMP_SERVER}:{RTMP_SERVER_RTMP_PORT}/pub_(code)</code></li>
+              <li><strong>URL:</strong> <code>rtmp://{RTMP_SERVER}/pub_(code)</code></li>
               <li><strong>Stream key / Play path:</strong> <code>username</code> (e.g. "mutsis")</li>
             </ul>
           </li>
