@@ -3,6 +3,11 @@ import { Router, Route, IndexRoute, browserHistory as history } from 'react-rout
 import { MainNavigation } from 'components/navigation'
 import { Home, ViewStream } from 'components/pages'
 
+require('configs/onesignal.config.js')
+require('file?name=[name].[ext]!manifest.json')
+require('file?name=[name].[ext]!vendor/onesignal/OneSignalSDKUpdaterWorker.js')
+require('file?name=[name].[ext]!vendor/onesignal/OneSignalSDKWorker.js')
+
 const Container = (props) => (
   <div>
     <MainNavigation brandName={'Postal'}/>
