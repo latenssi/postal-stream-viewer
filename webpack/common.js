@@ -39,8 +39,7 @@ module.exports = {
       hash: true
     }),
     new webpack.DefinePlugin({
-      'process.env.PUSHER_TOKEN': JSON.stringify(process.env.PUSHER_TOKEN),
-      'process.env.STREAMERS_ENDPOINT': JSON.stringify(process.env.STREAMERS_ENDPOINT)
+      'process.env.PUSHER_TOKEN': JSON.stringify(process.env.PUSHER_TOKEN)
     })
   ]
 }

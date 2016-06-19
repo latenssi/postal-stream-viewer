@@ -6,7 +6,8 @@ const envPlugin = new webpack.DefinePlugin({
   'process.env.RTMP_SERVER': JSON.stringify(process.env.RTMP_SERVER),
   'process.env.RTMP_SERVER_HTTP_PORT': JSON.stringify(process.env.RTMP_SERVER_HTTP_PORT),
   'process.env.RTMP_SERVER_RTMP_PORT': JSON.stringify(process.env.RTMP_SERVER_RTMP_PORT),
-  'process.env.ONESIGNAL_APP_ID': JSON.stringify(process.env.ONESIGNAL_APP_ID_PROD)
+  'process.env.ONESIGNAL_APP_ID': JSON.stringify(process.env.ONESIGNAL_APP_ID_PROD),
+  'process.env.STREAMERS_ENDPOINT': JSON.stringify(process.env.STREAMERS_ENDPOINT_PROD)
 })
 
 const optimizePlugin = new webpack.optimize.UglifyJsPlugin({

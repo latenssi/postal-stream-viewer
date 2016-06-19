@@ -6,7 +6,8 @@ const envPlugin = new webpack.DefinePlugin({
   'process.env.RTMP_SERVER': JSON.stringify('localhost'),
   'process.env.RTMP_SERVER_HTTP_PORT': JSON.stringify('8000'),
   'process.env.RTMP_SERVER_RTMP_PORT': JSON.stringify('1935'),
-  'process.env.ONESIGNAL_APP_ID': JSON.stringify(process.env.ONESIGNAL_APP_ID)
+  'process.env.ONESIGNAL_APP_ID': JSON.stringify(process.env.ONESIGNAL_APP_ID),
+  'process.env.STREAMERS_ENDPOINT': JSON.stringify(process.env.STREAMERS_ENDPOINT)
 })
 
 module.exports = {
