@@ -22,7 +22,7 @@ services:
     command: npm run build
 
   rtmp:
-    image: latenssi/nginx-rtmp
+    image: latenssi/nginx-rtmp:latest
     environment:
       PUBLISH_SECRET: 'dev'
       CORS_HTTP_ORIGIN: '(https?://localhost(:[0-9]+)?)'
