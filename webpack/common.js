@@ -6,8 +6,7 @@ const envPlugin = new webpack.DefinePlugin({
   'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
   'process.env.RTMP_SERVER': JSON.stringify(process.env.RTMP_SERVER || null),
   'process.env.RTMP_SERVER_HTTP_PORT': JSON.stringify(process.env.RTMP_SERVER_HTTP_PORT || 80),
-  'process.env.RTMP_SERVER_RTMP_PORT': JSON.stringify(process.env.RTMP_SERVER_RTMP_PORT || 1935),
-  'process.env.RTMP_SECRET': JSON.stringify(process.env.RTMP_SECRET || '')
+  'process.env.RTMP_SERVER_RTMP_PORT': JSON.stringify(process.env.RTMP_SERVER_RTMP_PORT || 1935)
 })
 
 module.exports = {
@@ -30,6 +29,7 @@ module.exports = {
     "react-dom": "ReactDOM",
     "react-router-dom": "ReactRouterDOM",
     "axios": "axios",
+    "flowplayer": "flowplayer",
     "Pusher": "Pusher"
   },
   loaders: [

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
-const flowplayer = window.flowplayer
+import flowplayer from 'flowplayer'
 
 const RTMP_SERVER = process.env.RTMP_SERVER
 const RTMP_SERVER_RTMP_PORT = process.env.RTMP_SERVER_RTMP_PORT

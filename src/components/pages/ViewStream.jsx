@@ -7,11 +7,11 @@ import { SelectStreamer } from 'components/SelectStreamer'
 const RTMP_SERVER = process.env.RTMP_SERVER
 const RTMP_SERVER_RTMP_PORT = process.env.RTMP_SERVER_RTMP_PORT
 const RTMP_SERVER_HTTP_PORT = process.env.RTMP_SERVER_HTTP_PORT
-const RTMP_SECRET = process.env.RTMP_SECRET
-const STATS_TOKEN = crypto.createHash('md5').update(`stats${RTMP_SECRET}`).digest("hex")
+
+// const STATS_TOKEN = crypto.createHash('md5').update(`stats${RTMP_SECRET}`).digest("hex")
 
 // Requires CORS to work and it does not
-const statsURL = `http://${RTMP_SERVER}:${RTMP_SERVER_HTTP_PORT}/p/${STATS_TOKEN}/stats`
+// const statsURL = `http://${RTMP_SERVER}:${RTMP_SERVER_HTTP_PORT}/p/${STATS_TOKEN}/stats`
 
 class ViewStream extends Component {
   constructor(props) {
@@ -29,9 +29,9 @@ class ViewStream extends Component {
     const { match: { params: newParams } } = nextProps
 
     if (!newParams || !newParams.stream) this.setState({ selectedVideo: null })
-    else if (newParams.stream && (!oldParams.stream || newParams.stream !== oldParams.stream)) {
+    else if (newParams.stream && (!oldParams.streamerId || newParams.streamerId !== oldParams.streamerId)) {
       this.setState({
-        selectedVideo: {src: newParams.stream, type: 'video/flash'}
+        selectedVideo: {src: newParams.streamerId, type: 'video/flash'}
       })
     }
   }
