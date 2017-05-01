@@ -97,7 +97,7 @@ class Player extends Component {
   render() {
     return (
       <div className="player">
-          <div className="player-wrap" ref="container"></div>
+          <div className="player-wrap" ref="container" />
       </div>
     )
   }

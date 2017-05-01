@@ -2,6 +2,14 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 
+const envPlugin = new webpack.DefinePlugin({
+  'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+  'process.env.RTMP_SERVER': JSON.stringify(process.env.RTMP_SERVER || null),
+  'process.env.RTMP_SERVER_HTTP_PORT': JSON.stringify(process.env.RTMP_SERVER_HTTP_PORT || 80),
+  'process.env.RTMP_SERVER_RTMP_PORT': JSON.stringify(process.env.RTMP_SERVER_RTMP_PORT || 1935),
+  'process.env.RTMP_SECRET': JSON.stringify(process.env.RTMP_SECRET || '')
+})
+
 module.exports = {
   context: './src',
   entry: 'main.jsx',
@@ -20,10 +28,9 @@ module.exports = {
     "jquery": "jQuery",
     "react": "React",
     "react-dom": "ReactDOM",
-    "react-router": "ReactRouter",
+    "react-router-dom": "ReactRouterDOM",
     "axios": "axios",
-    "Pusher": "Pusher",
-    "OneSignal": "OneSignal"
+    "Pusher": "Pusher"
   },
   loaders: [
     {
@@ -38,8 +45,6 @@ module.exports = {
       inject: 'body',
       hash: true
     }),
-    new webpack.DefinePlugin({
-      'process.env.PUSHER_TOKEN': JSON.stringify(process.env.PUSHER_TOKEN)
-    })
+    envPlugin
   ]
 }

@@ -1,7 +1,0 @@
-{
-  "name": "Postal",
-  "short_name": "Postal",
-  "start_url": "/",
-  "display": "standalone",
-  "gcm_sender_id": "1041343409276"
-}

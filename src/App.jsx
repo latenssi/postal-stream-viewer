@@ -1,36 +1,14 @@
-import React, { Component, PropTypes } from 'react'
-import { Router, Route, IndexRoute, browserHistory as history } from 'react-router'
-import { MainNavigation } from 'components/navigation'
-import { Home, ViewStream } from 'components/pages'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { MainNavigation } from 'components/navigation/MainNavigation'
+import { ViewStream } from 'components/pages/ViewStream'
 
-require('configs/onesignal.config.js')
-require('file?name=[name].[ext]!manifest.json')
-require('file?name=[name].[ext]!vendor/onesignal/OneSignalSDKUpdaterWorker.js')
-require('file?name=[name].[ext]!vendor/onesignal/OneSignalSDKWorker.js')
-
-const Container = (props) => (
-  <div>
-    <MainNavigation brandName={'Postal'}/>
-    <div className="container-fluid">{props.children}</div>
-  </div>
+export const App = () => (
+  <Router>
+    <div>
+      <MainNavigation brandName={'Streamer'}/>
+      <Route exact={ true } path="/" component={ ViewStream }/>
+      <Route path="/:streamerId" component={ ViewStream }/>
+    </div>
+  </Router>
 )
-
-Container.propTypes = {
-  children: PropTypes.node
-}
-
-export class App extends Component {
-  render() {
-    return (
-      <Router history={history}>
-        <Route path='/' component={Container}>
-          <IndexRoute component={Home}/>
-          <Route path='stream'>
-            <IndexRoute component={ViewStream}/>
-            <Route path=':stream' component={ViewStream}/>
-          </Route>
-        </Route>
-      </Router>
-    )
-  }
-}

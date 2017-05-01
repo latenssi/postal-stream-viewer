@@ -1,56 +1,37 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
-import axios from 'axios'
-
-import { pusher } from 'configs/pusher'
+import { Link } from 'react-router-dom'
+import crypto from 'crypto'
 import { Player } from 'components/Player'
-import { SelectStream } from 'components/SelectStream'
+import { SelectStreamer } from 'components/SelectStreamer'
 
-const STREAM_CHANNEL = 'stream_publish'
-const STREAMERS_ENDPOINT = process.env.STREAMERS_ENDPOINT
 const RTMP_SERVER = process.env.RTMP_SERVER
 const RTMP_SERVER_RTMP_PORT = process.env.RTMP_SERVER_RTMP_PORT
+const RTMP_SERVER_HTTP_PORT = process.env.RTMP_SERVER_HTTP_PORT
+const RTMP_SECRET = process.env.RTMP_SECRET
+const STATS_TOKEN = crypto.createHash('md5').update(`stats${RTMP_SECRET}`).digest("hex")
+
+// Requires CORS to work and it does not
+const statsURL = `http://${RTMP_SERVER}:${RTMP_SERVER_HTTP_PORT}/p/${STATS_TOKEN}/stats`
 
 class ViewStream extends Component {
   constructor(props) {
     super(props)
-    const { params: { stream = null } } = this.props
+    const { streamerId } = this.props.match.params
+
     this.state = {
-      streamers: [],
-      selectedVideo: stream ? {src: stream, type: 'video/flash'} : null
+      streamers: null,
+      selectedVideo: streamerId ? { src: streamerId, type: 'video/flash' } : null
     }
   }
 
-  componentDidMount() {
-    axios.get(STREAMERS_ENDPOINT)
-      .then(response => response.data.data)
-      .then(streamers => this.setState({
-        streamers: streamers.map(s => s.name)
-      }))
-
-    this.streamChannel = pusher.subscribe(STREAM_CHANNEL)
-    this.streamChannel.bind('publish', streamer => this.setState({
-      streamers: [
-        ...this.state.streamers.filter(s => s !== streamer.name),
-        streamer.name
-      ]
-    }))
-    this.streamChannel.bind('publish_done', streamer => this.setState({
-      streamers: this.state.streamers.filter(s => s !== streamer.name)
-    }))
-  }
-
-  componentWillUnmount() {
-    pusher.unsubscribe(STREAM_CHANNEL)
-  }
-
   componentWillReceiveProps(nextProps) {
-    const { params: { stream: newStreamName = null } } = nextProps
-    const { params: { stream: oldStreamName } } = this.props
-    if (!newStreamName) this.setState({selectedVideo: null})
-    else if (newStreamName && newStreamName !== oldStreamName) {
+    const { match: { params: oldParams } } = this.props
+    const { match: { params: newParams } } = nextProps
+
+    if (!newParams || !newParams.stream) this.setState({ selectedVideo: null })
+    else if (newParams.stream && (!oldParams.stream || newParams.stream !== oldParams.stream)) {
       this.setState({
-        selectedVideo: {src: newStreamName, type: 'video/flash'}
+        selectedVideo: {src: newParams.stream, type: 'video/flash'}
       })
     }
   }
@@ -75,15 +56,16 @@ class ViewStream extends Component {
   }
 
   render() {
-    const { selectedVideo, streamers } = this.state
+    const { selectedVideo = null, streamers = null } = this.state
     return (
       <div>
-        <div className="stream-controls btn-group btn-group-justified"
-          style={{marginBottom: "20px"}}>
-          <SelectStream streams={streamers}/>
-          <Link className="btn btn-default" to="/stream" disabled={!selectedVideo}>Close</Link>
-        </div>
-        {!! selectedVideo && <Player video={selectedVideo}/>}
+        { !!streamers &&
+          <div className="stream-controls btn-group btn-group-justified" style={{marginBottom: "20px"}}>
+            <SelectStreamer streamers={ streamers } />
+            <Link className="btn btn-default" to="/" disabled={ !selectedVideo }>Close</Link>
+          </div>
+        }
+        {!! selectedVideo && <Player video={ selectedVideo }/>}
         {! selectedVideo && this.renderInstructions()}
       </div>
     )

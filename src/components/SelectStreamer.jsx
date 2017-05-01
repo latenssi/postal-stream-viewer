@@ -1,16 +1,16 @@
 import React, {PropTypes} from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
-export const SelectStream = ({ streams }) => {
+export const SelectStreamer = ({ streamers }) => {
   return (
     <div className="btn-group">
       <button className="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
         Select stream <span className="caret"></span>
       </button>
       <ul className="dropdown-menu">
-        {streams.map((s, idx) => (
+        { streamers.map((s, idx) => (
           <li key={idx}>
-            <Link to={`/stream/${s}`}>{s}</Link>
+            <Link to={`/${s}`}>{s}</Link>
           </li>
         ))}
       </ul>
@@ -18,6 +18,6 @@ export const SelectStream = ({ streams }) => {
   )
 }
 
-SelectStream.propTypes = {
-  streams: PropTypes.array.isRequired
+SelectStreamer.propTypes = {
+  streamers: PropTypes.array.isRequired
 }

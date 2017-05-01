@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { IndexLink, Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export class MainNavigation extends Component {
 
@@ -16,13 +16,9 @@ export class MainNavigation extends Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <IndexLink to="/" className="navbar-brand">{brandName}</IndexLink>
+            <Link to="/" className="navbar-brand">{brandName}</ Link>
           </div>
-          <div id="navbar" className="navbar-collapse collapse">
-            <ul className="nav navbar-nav">
-              <li><Link to="/stream">Stream</Link></li>
-            </ul>
-          </div>
+          <div id="navbar" className="navbar-collapse collapse"> </div>
         </div>
       </nav>
     )

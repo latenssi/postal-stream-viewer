@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.jsx",
   "scripts": {
-    "start": "webpack-dev-server  --config webpack/config.dev.js --hot --inline --https",
+    "start": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js  --config webpack/config.dev.js --hot --inline",
     "build": "webpack -p --config webpack/config.prod.js"
   },
   "author": "",
@@ -19,10 +19,10 @@
     "babel-preset-react": "^6",
     "eslint": "^2",
     "eslint-plugin-react": "^5",
-    "file-loader": "^0.8",
     "html-webpack-plugin": "^2",
     "webpack": "^1",
-    "webpack-dev-server": "^1"
+    "webpack-dev-server": "^1",
+    "xml2js": "^0.4.17"
   },
   "eslintConfig": {
     "plugins": [
